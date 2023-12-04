@@ -4,7 +4,14 @@
  * FACEBOOK: https://www.facebook.com/themefisher
  * GITHUB: https://github.com/themefisher/
  */
-
+		// Menghilangkan overlay saat halaman selesai dimuat
+		document.onreadystatechange = function () {
+		  if (document.readyState === 'complete') {
+			setTimeout(function () {
+			  document.getElementById('loader-wrapperz').style.display = 'none';
+			}, 2000); // Sesuaikan timeout dengan durasi animasi CSS
+		  }
+		};
 (function ($) {
   "use strict";
 
