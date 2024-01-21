@@ -2,55 +2,64 @@ import { postWithBearer } from "https://jscroot.github.io/api/croot.js";
 export let URLPost = `https://asia-southeast2-msyahid.cloudfunctions.net/InsertDataProduk`
 export let token = 'token';
 
+function showLoadingOverlay() {
+    // Show loading overlay
+    document.getElementById('loader-wrapper').style.display = 'flex';
+  }
+  
+  function hideLoadingOverlay() {
+    // Hide loading overlay
+    document.getElementById('loader-wrapper').style.display = 'none';
+  }
 
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector("form");
 
     form.addEventListener("submit", function(event) {
         event.preventDefault();
+        // Display loading overlay
+        showLoadingOverlay();
         let data = GetDataForm();
         postWithBearer(URLPost, token, data, ResponsePost)
     });
 });
 
     export function GetDataForm(){
-        const namaproduk = document.querySelector("#productName").value;
-        const harga = document.querySelector("#productPrice").value;
-        const quantity = document.querySelector("#productQuantity").value;
-        const total = document.querySelector("#productTotal").value;
-        const namapembeli = document.querySelector("#namapembeli").value;
-        const email = document.querySelector("#email").value;
-        const alamat = document.querySelector("#alamat").value;
-        const nohp = document.querySelector("#nohp").value;
-        console.log(namapembeli)
+        const nama = document.querySelector("#nama").value;
+        const harga = document.querySelector("#harga").value;
+        const deskripsi = document.querySelector("#deskripsi").value;
+        const stok = document.querySelector("#stok").value;
+        const image = document.querySelector("#image").value;
+        console.log(nama)
     
         const data = {
-            namaproduk: namaproduk,
+            nama: nama,
             harga: harga,
-            quantity: quantity,
-            total : total,
-            namapembeli : namapembeli,
-            email : email,
-            alamat : alamat,
-            nohp : nohp,
+            deskripsi: deskripsi,
+            stok : stok,
+            image : image,
         };
         return data
     }
     
     export function ResponsePost (result) {
+      hideLoadingOverlay();
       if (result.status === true) {
         Swal.fire({
             icon: "success",
-            title: "Success Silahkan lanjutkan",
-            text: result.message,
+            title: "Insert Successful",
+            showConfirmButton: false,
+            timer : 1000,
         }).then(() => {
-            window.location.href = "https://wa.me/62895326369830?text=Bayar";
+            window.location.href = "/admin/page/tables.html";
         });
     } else {
         Swal.fire({
             icon: "error",
             title: "Insert Failed",
             text: result.message,
+            showConfirmButton: false,
+            timer : 2000,
         });
     }
 }

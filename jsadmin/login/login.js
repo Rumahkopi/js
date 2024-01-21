@@ -1,6 +1,7 @@
-import PostSignUp from "./loginfunc.js";
+import Login from "./loginfunc.js";
 
-window.PostSignUp = PostSignUp;
+window.Login = Login;
+
   // Menghilangkan overlay saat halaman selesai dimuat
   document.onreadystatechange = function () {
     if (document.readyState === 'complete') {
