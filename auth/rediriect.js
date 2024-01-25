@@ -5,7 +5,7 @@ const checkTokenAndRedirect = () => {
     const tokenValue = getCookie(token);
 
     if (!tokenValue) {
-        window.location.href = "https://rumahkopi.yumerp.me/admin/page/login.html";
+        window.location.href = "https://rumahkopi.yumerp.me/login.html";
     }
 }
 
