@@ -10,9 +10,12 @@ function createTableRow(value) {
     row.className = "content is-size-6";
 
     const columns = ["nama", "harga", "deskripsi", "stok", "image"];
+    const labels = ["Nama", "Harga", "Deskripsi", "Stok", "Image"];
+
+
     columns.forEach(column => {
         const cell = document.createElement("td");
-        cell.dataset.label = column === "image" ? "image" : column;
+        cell.dataset.label = `${labels[index]}`; // Use data-label attribute
         
         if (column === "image") {
             const image = document.createElement("img");

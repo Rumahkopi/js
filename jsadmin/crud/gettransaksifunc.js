@@ -9,10 +9,12 @@ function createTableRow(value) {
     row.className = "content is-size-6";
 
     const columns = ["transaksi_number", "user_phone", "formatted_time", "buktitf"];
-    columns.forEach(column => {
+    const labels = ["Transaksi", "No. Hp", "Waktu", "Bukti Transaksi"];
+
+    columns.forEach((column, index) => {
         const cell = document.createElement("td");
-        cell.dataset.label = column === "buktitf" ? "image" : column;
-        
+        cell.dataset.label = `${labels[index]}`; // Use data-label attribute
+
         if (column === "buktitf") {
             const image = document.createElement("img");
             image.src = value[column];
