@@ -1,22 +1,20 @@
-// script.js
 import { get } from "https://jscroot.github.io/api/croot.js";
 
 const URLDataProduk = "https://asia-southeast2-msyahid.cloudfunctions.net/GetDataProduk";
 const tableContainer = document.getElementById("produk");
 
 // Function to create a table row
-function createTableRow(value) {  
+function createTableRow(value) {
     const row = document.createElement("tr");
     row.className = "content is-size-6";
 
     const columns = ["nama", "harga", "deskripsi", "stok", "image"];
     const labels = ["Nama", "Harga", "Deskripsi", "Stok", "Image"];
 
-
-    columns.forEach(column => {
+    columns.forEach((column, index) => {
         const cell = document.createElement("td");
         cell.dataset.label = `${labels[index]}`; // Use data-label attribute
-        
+
         if (column === "image") {
             const image = document.createElement("img");
             image.src = value[column];
@@ -39,29 +37,29 @@ function createTableRow(value) {
         row.appendChild(cell);
     });
 
-        // Add a new cell for the buttons
-        const buttonsCell = document.createElement("td");
-        const buttonsContainer = document.createElement("div");
-        buttonsContainer.className = "buttons is-right";
-    
-        const editButton = document.createElement("a");
-        editButton.href = `edit.html?_id=${value._id}`; // Replace #IDEDIT# with the actual property containing the ID
-        editButton.className = "button is-dark jb-modal";
-        editButton.dataset.produkId = value.id; // Replace #IDHAPUS# with the actual property containing the ID
-        editButton.dataset.target = "edit-modal";
-        editButton.type = "button";
-        editButton.innerHTML = '<span class="icon"><i class="mdi mdi-eye-circle"></i></span>';
-    
-        const deleteButton = document.createElement("button");
-        deleteButton.className = "button is-dark";
-        deleteButton.type = "button";
-        deleteButton.onclick = () => deleteProduk(value._id); // Replace #DELETE# with the actual property containing the ID
-        deleteButton.innerHTML = '<span class="icon"><i class="mdi mdi-delete-circle"></i></span>';
-    
-        buttonsContainer.appendChild(editButton);
-        buttonsContainer.appendChild(deleteButton);
-        buttonsCell.appendChild(buttonsContainer);
-        row.appendChild(buttonsCell);
+    // Add a new cell for the buttons
+    const buttonsCell = document.createElement("td");
+    const buttonsContainer = document.createElement("div");
+    buttonsContainer.className = "buttons is-right";
+
+    const editButton = document.createElement("a");
+    editButton.href = `edit.html?_id=${value._id}`;
+    editButton.className = "button is-dark jb-modal";
+    editButton.dataset.produkId = value.id;
+    editButton.dataset.target = "edit-modal";
+    editButton.type = "button";
+    editButton.innerHTML = '<span class="icon"><i class="mdi mdi-eye-circle"></i></span>';
+
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "button is-dark";
+    deleteButton.type = "button";
+    deleteButton.onclick = () => deleteProduk(value._id);
+    deleteButton.innerHTML = '<span class="icon"><i class="mdi mdi-delete-circle"></i></span>';
+
+    buttonsContainer.appendChild(editButton);
+    buttonsContainer.appendChild(deleteButton);
+    buttonsCell.appendChild(buttonsContainer);
+    row.appendChild(buttonsCell);
 
     return row;
 }
