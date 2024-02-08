@@ -23,9 +23,9 @@ class Products {
 
       let products = data;
       products = products.map((item) => {
-        const { _id, nama, harga, deskripsi, image } = item;
+        const { _id, nama, harga, deskripsi, stok, image } = item;
 
-        return { id: _id, title: nama, price: harga, description: deskripsi, image: image };
+        return { id: _id, title: nama, price: harga, description: deskripsi, stok: stok , image: image };
       });
       return products;
     } catch (error) {
@@ -39,21 +39,24 @@ class UI {
   displayProducts(products) {
     let result = "";
     products.forEach((product) => {
+         // Check if product is in stock
+    const isInStock = product.stok > 0;
       result += `
         <!-- single product start -->
         <article class="product">
           <div class="img-container">
             <img src=${product.image} alt="product" class="product-img"/>  
-            <button class="bag-btn" data-id=${product.id}>
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-              add to cart
-            </button> 
+            <button class="bag-btn" data-id=${product.id} ${isInStock ? '' : 'disabled'}>
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            ${isInStock ? 'add to cart' : 'out of stock'}
+          </button> 
             <button class="view-btn" data-id=${product.id}>
             <i class="fa fa-eye" aria-hidden="true"></i>
             view
           </button>      
           </div>
           <h3>${product.title}</h3>
+          <h3>Stok :${product.stok}</h3>
           <h4 class="label">Price: Rp. ${product.price}</h4>
         </article>
         <!-- single product end -->`;
@@ -70,11 +73,13 @@ class UI {
     const modal = document.getElementById("myModal");
     const modalTitle = document.getElementById("modal-title");
     const modalDescription = document.getElementById("modal-description");
+    const modalStok = document.getElementById("modal-stok");
     const modalImage = document.getElementById("modal-image");
     const modalPrice = document.getElementById("modal-price");
 
     modalTitle.textContent = product.title;
     modalDescription.textContent = product.description;
+    modalStok.textContent = `Stock : ${product.stok}`;
     modalImage.src = product.image;
     modalPrice.textContent = `Price : Rp. ${product.price}`;
 
@@ -208,7 +213,7 @@ viewButton.addEventListener("click", () => {
     const customerAddress = document.getElementById('alamat').value;
     const customerPhoneNumber = document.getElementById('nohp').value;
   
-    const message = `beli Saya Ingin Membeli Semua Produk Ini :\nProduk : ${productDetails}\nTotal Jumlah Barang : ${totalQuantity}\nTotal Keseluruhan : Rp. ${totalAmount}\n\nInformasi Customer :\nNama : ${customerName}\nAlamat : ${customerAddress}\nNo. Hp : ${customerPhoneNumber}`;
+    const message = `Pesanan : Saya Ingin Membeli Semua Produk Ini :\nProduk : ${productDetails}\nTotal Jumlah Barang : ${totalQuantity}\nTotal Keseluruhan : Rp. ${totalAmount}\n\nInformasi Customer :\nNama : ${customerName}\nAlamat/Meja: ${customerAddress}\nNo. Hp : ${customerPhoneNumber}`;
   
     const encodedMessage = encodeURIComponent(message);
   
