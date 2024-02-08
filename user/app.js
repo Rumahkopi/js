@@ -213,7 +213,7 @@ viewButton.addEventListener("click", () => {
     const customerAddress = document.getElementById('alamat').value;
     const customerPhoneNumber = document.getElementById('nohp').value;
   
-    const message = `Pesanan : Saya Ingin Membeli Semua Produk Ini :\nProduk : ${productDetails}\nTotal Jumlah Barang : ${totalQuantity}\nTotal Keseluruhan : Rp. ${totalAmount}\n\nInformasi Customer :\nNama : ${customerName}\nAlamat/Meja: ${customerAddress}\nNo. Hp : ${customerPhoneNumber}`;
+    const message = `Order : \nSaya Ingin Beli Semua Produk Ini :\nProduk : ${productDetails}\nTotal Jumlah Barang : ${totalQuantity}\nTotal Keseluruhan : Rp. ${totalAmount}\n\nInformasi Customer :\nNama : ${customerName}\nAlamat/Meja: ${customerAddress}\nNo. Hp : ${customerPhoneNumber}`;
   
     const encodedMessage = encodeURIComponent(message);
   
