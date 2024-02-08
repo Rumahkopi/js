@@ -5,7 +5,7 @@ const checkTokenAndRedirect = () => {
     const tokenValue = getCookie(token);
 
     if (!tokenValue) {
-        window.location.href = "https://rumahkopi.github.io/login.html";
+        window.location.href = "https://rumahkopi.thomyy.my.id/login.html";
     }
 }
 

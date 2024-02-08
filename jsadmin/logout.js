@@ -16,7 +16,7 @@ function logout() {
           // Delete the token cookie
           deleteCookie("token");
           // Redirect to the login page
-          window.location.href = "https://rumahkopi.github.io/";
+          window.location.href = "https://rumahkopi.thomyy.my.id/";
       }
   });
 }
